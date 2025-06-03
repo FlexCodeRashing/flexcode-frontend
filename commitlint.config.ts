@@ -13,7 +13,8 @@ const config: UserConfig = {
                 "refactor",
                 "revert",
                 "chore",
-                "config"
+                "config",
+                "feat"
             ]
         ]
     }
