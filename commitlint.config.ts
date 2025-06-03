@@ -12,7 +12,8 @@ const config: UserConfig = {
                 "fix",
                 "refactor",
                 "revert",
-                "chore"
+                "chore",
+                "config"
             ]
         ]
     }
