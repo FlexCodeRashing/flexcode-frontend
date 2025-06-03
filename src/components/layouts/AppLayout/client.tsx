@@ -6,7 +6,7 @@ import "./style.css"
 
 export default function Client({children}: {children?: ReactNode}) {
     const theme = useTheme();
-    const style = getStyleFromTheme(theme).theme ?? "";
+    const style = getStyleFromTheme(theme);
     return <div className={`theme ${style}`}>
         {children}
     </div>

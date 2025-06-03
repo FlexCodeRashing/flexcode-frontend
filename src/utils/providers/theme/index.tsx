@@ -5,8 +5,8 @@ import lightTheme from "@/config/themes/light.module.css";
 import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 
 const THEMES: {[key: string]: any} = {
-    "light": lightTheme,
-    "dark": darkTheme
+    "light": lightTheme.theme,
+    "dark": darkTheme.theme
 }
 
 const ThemeContext = createContext<string>("dark");
