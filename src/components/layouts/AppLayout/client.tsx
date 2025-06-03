@@ -1,13 +1,11 @@
-"use client"
+"use client";
 
 import { ReactNode } from "react";
 import { useTheme, getStyleFromTheme } from "@/utils/providers/theme";
-import "./style.css"
+import "./style.css";
 
-export default function Client({children}: {children?: ReactNode}) {
+export default function Client({ children }: { children?: ReactNode }) {
     const theme = useTheme();
     const style = getStyleFromTheme(theme);
-    return <div className={`theme ${style}`}>
-        {children}
-    </div>
+    return <div className={`theme ${style}`}>{children}</div>;
 }

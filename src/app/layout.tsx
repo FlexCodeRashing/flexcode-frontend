@@ -24,18 +24,20 @@ export const metadata: Metadata = {
     description: "" // TODO: add description and other metadata fields
 };
 
-export default async function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({
+    children
+}: {
+    children: ReactNode;
+}) {
     const cookieStore = await cookies();
-    const theme = cookieStore.get("theme")?.value
+    const theme = cookieStore.get("theme")?.value;
     return (
         <html>
             <body
                 className={`antialiased ${fontGeist.variable} ${fontInter.variable}`}
             >
                 <ThemeProvider _theme={theme}>
-                    <AppLayout>
-                        {children}
-                    </AppLayout>
+                    <AppLayout>{children}</AppLayout>
                 </ThemeProvider>
             </body>
         </html>

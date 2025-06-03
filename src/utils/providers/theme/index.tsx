@@ -2,30 +2,46 @@
 
 import darkTheme from "@/config/themes/dark.module.css";
 import lightTheme from "@/config/themes/light.module.css";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
+import {
+    createContext,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState
+} from "react";
 
-const THEMES: {[key: string]: any} = {
-    "light": lightTheme.theme,
-    "dark": darkTheme.theme
-}
+const THEMES: { [key: string]: string } = {
+    light: lightTheme.theme,
+    dark: darkTheme.theme
+};
 
 const ThemeContext = createContext<string>("dark");
 
-export function ThemeProvider({children, _theme}: {children?: ReactNode, _theme?: string}) {
-    const [theme, setTheme] = useState<string | undefined>(_theme)
+export function ThemeProvider({
+    children,
+    _theme
+}: {
+    children?: ReactNode;
+    _theme?: string;
+}) {
+    const [theme, setTheme] = useState<string | undefined>(_theme);
 
     useEffect(() => {
         if (!theme) {
-            const isPreferDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const isPreferDark = window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            ).matches;
             console.debug("Prefers theme: ", isPreferDark ? "dark" : "light");
             setTheme(isPreferDark ? "dark" : "light");
         }
     }, [theme]);
 
     if (theme) {
-        return <ThemeContext.Provider value={theme}>
-            {children}
-        </ThemeContext.Provider>
+        return (
+            <ThemeContext.Provider value={theme}>
+                {children}
+            </ThemeContext.Provider>
+        );
     }
 }
 

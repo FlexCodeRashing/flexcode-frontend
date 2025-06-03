@@ -1,3 +1,5 @@
-export default function HomePage() {
-    return <>Hello world!</>;
+"use server";
+
+export default async function HomePage() {
+    return <>Hello SSR World!</>;
 }
