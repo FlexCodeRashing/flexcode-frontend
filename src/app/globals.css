@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 body {
-    font-family: var(--font-inter);
+    font-family: var(--font-inter), sans-serif;
     height: 100vh;
 }
 
@@ -21,5 +21,5 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--font-geist);
+    font-family: var(--font-geist), sans-serif;
 }
