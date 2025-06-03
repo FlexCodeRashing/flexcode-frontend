@@ -31,7 +31,7 @@ export function ThemeProvider(props: {
             console.debug("Prefers theme: ", isPreferDark ? "dark" : "light");
             setTheme(isPreferDark ? "dark" : "light");
         }
-    }, [theme, setCookie]);
+    }, [props.theme, theme, setCookie]);
     if (theme != "system") {
         const themeStyle = getStyleFromTheme(theme)
         return (
