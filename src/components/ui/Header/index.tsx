@@ -1,10 +1,7 @@
 "use server";
 
 import style from "./header.module.css";
-
-function SectionLogo() {
-    return <div></div>;
-}
+import { SectionLogo } from "./client";
 
 interface IHeader {
     /**
@@ -16,8 +13,10 @@ interface IHeader {
 
 export default async function Header(props: IHeader) {
     return (
-        <header className={style.header}>
-            <SectionLogo />
+        <header className={style.headerWrapper}>
+            <div className={style.header}>
+                <SectionLogo classname={style.header__logo} />
+            </div>
         </header>
     );
 }
