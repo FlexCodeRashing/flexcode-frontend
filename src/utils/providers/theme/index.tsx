@@ -12,7 +12,7 @@ const THEMES: {[key: string]: any} = {
 const ThemeContext = createContext<string>("dark");
 
 export function ThemeProvider({children, _theme}: {children?: ReactNode, _theme?: string}) {
-    const [theme, setTheme] = useState<string>(_theme ? THEMES[_theme] : undefined)
+    const [theme, setTheme] = useState<string | undefined>(_theme)
 
     useEffect(() => {
         if (!theme) {
