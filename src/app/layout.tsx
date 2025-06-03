@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Inter } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
+import AppLayout from "@/components/layouts/AppLayout";
 
 const fontGeist = Geist({
     variable: "--font-geist",
@@ -27,7 +28,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             <body
                 className={`antialiased ${fontGeist.variable} ${fontInter.variable}`}
             >
-                {children}
+                <AppLayout>
+                    {children}
+                </AppLayout>
             </body>
         </html>
     );
