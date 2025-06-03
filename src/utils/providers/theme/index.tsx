@@ -20,7 +20,7 @@ export function ThemeProvider({children, _theme}: {children?: ReactNode, _theme?
             console.debug("Prefers theme: ", isPreferDark ? "dark" : "light");
             setTheme(isPreferDark ? "dark" : "light");
         }
-    }, []);
+    }, [theme]);
 
     if (theme) {
         return <ThemeContext.Provider value={theme}>
