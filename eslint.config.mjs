@@ -14,7 +14,14 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
     ...compat.extends("next/core-web-vitals", "next/typescript"),
-    ...storybook.configs["flat/recommended"]
+    ...storybook.configs["flat/recommended"],
+    ...compat.config({
+        extends: ["next"],
+        rules: {
+            "react/no-unescaped-entities": 1,
+            "@typescript-eslint/no-unused-vars": 1
+        }
+    })
 ];
 
 export default eslintConfig;
