@@ -27,3 +27,9 @@ h5,
 h6 {
     font-family: var(--font-geist), sans-serif;
 }
+
+h1 {
+    font-size: xx-large;
+    font-weight: 600;
+    line-height: 1.2;
+}
