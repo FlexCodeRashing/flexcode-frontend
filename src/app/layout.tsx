@@ -4,6 +4,7 @@ import "./globals.css";
 import { ReactNode } from "react";
 import AppLayout from "@/components/layouts/AppLayout";
 import { ThemeProvider } from "@/utils/providers/theme";
+import { cookies } from "next/headers";
 
 const fontGeist = Geist({
     variable: "--font-geist",
@@ -23,13 +24,15 @@ export const metadata: Metadata = {
     description: "" // TODO: add description and other metadata fields
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default async function RootLayout({ children }: { children: ReactNode }) {
+    const cookieStore = await cookies();
+    const theme = cookieStore.get("theme")?.value
     return (
         <html>
             <body
                 className={`antialiased ${fontGeist.variable} ${fontInter.variable}`}
             >
-                <ThemeProvider>
+                <ThemeProvider _theme={theme}>
                     <AppLayout>
                         {children}
                     </AppLayout>
