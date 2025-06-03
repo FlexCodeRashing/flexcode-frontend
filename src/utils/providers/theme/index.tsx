@@ -1,50 +1,45 @@
 "use client";
 
+import style from "./style.module.css"
 import darkTheme from "@/config/themes/dark.module.css";
 import lightTheme from "@/config/themes/light.module.css";
 import {
-    createContext,
     ReactNode,
-    useContext,
     useEffect,
     useState
 } from "react";
+import {useSetCookie} from "cookies-next";
 
 const THEMES: { [key: string]: string } = {
     light: lightTheme.theme,
     dark: darkTheme.theme
 };
 
-const ThemeContext = createContext<string>("dark");
-
-export function ThemeProvider({
-    children,
-    _theme
-}: {
+export function ThemeProvider(props: {
     children?: ReactNode;
-    _theme?: string;
+    theme: string;
 }) {
-    const [theme, setTheme] = useState<string | undefined>(_theme);
+    const [theme, setTheme] = useState<string>(props.theme);
+    const setCookie = useSetCookie();
 
     useEffect(() => {
-        if (!theme) {
+        setCookie("theme", props.theme)
+        if (theme == "system") {
             const isPreferDark = window.matchMedia(
                 "(prefers-color-scheme: dark)"
             ).matches;
             console.debug("Prefers theme: ", isPreferDark ? "dark" : "light");
             setTheme(isPreferDark ? "dark" : "light");
         }
-    }, [theme]);
-
-    if (theme) {
+    }, [theme, setCookie]);
+    if (theme != "system") {
+        const themeStyle = getStyleFromTheme(theme)
         return (
-            <ThemeContext.Provider value={theme}>
-                {children}
-            </ThemeContext.Provider>
+            <div className={`${style.theme} ${themeStyle}`}>
+                {props.children}
+            </div>
         );
     }
 }
 
-export const getStyleFromTheme = (theme: string) => THEMES[theme];
-
-export const useTheme = () => useContext(ThemeContext);
+export const getStyleFromTheme = (theme: string) => THEMES[theme] ?? darkTheme;

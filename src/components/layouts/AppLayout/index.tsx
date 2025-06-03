@@ -1,7 +1,6 @@
 "use server";
 
 import Header from "@/components/ui/Header";
-import Client from "./client";
 import { ReactNode } from "react";
 
 export default async function AppLayout({
@@ -11,10 +10,8 @@ export default async function AppLayout({
 }) {
     return (
         <div className={`root`}>
-            <Client>
-                <Header />
-                {children}
-            </Client>
+            <Header />
+            {children}
         </div>
     );
 }

@@ -30,13 +30,13 @@ export default async function RootLayout({
     children: ReactNode;
 }) {
     const cookieStore = await cookies();
-    const theme = cookieStore.get("theme")?.value;
+    const theme = cookieStore.get("theme")?.value ?? "system";
     return (
         <html>
             <body
                 className={`antialiased ${fontGeist.variable} ${fontInter.variable}`}
             >
-                <ThemeProvider _theme={theme}>
+                <ThemeProvider theme={theme}>
                     <AppLayout>{children}</AppLayout>
                 </ThemeProvider>
             </body>
