@@ -62,9 +62,16 @@ export function ThemeProvider(props: {
     } else if (props.fallbackTheme) {
         const themeStyle = getStyleFromTheme(props.fallbackTheme);
         return (
-            <div className={`${style.theme} ${themeStyle}`}>
-                {props.children}
-            </div>
+            <ThemeContext.Provider
+                value={{
+                    themeSelected: props.theme,
+                    themeDisplayed: props.fallbackTheme
+                }}
+            >
+                <div className={`${style.theme} ${themeStyle}`}>
+                    {props.children}
+                </div>
+            </ThemeContext.Provider>
         );
     }
 }
