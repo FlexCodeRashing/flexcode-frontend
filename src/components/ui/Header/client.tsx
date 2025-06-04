@@ -3,14 +3,6 @@
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
 
-export function SectionLogo({ classname }: { classname?: string }) {
-    return (
-        <div className={classname}>
-            {/*TODO: add logo*/}
-            <h1>FlexCode</h1>
-        </div>
-    );
-}
 
 export function NavigationLink({
     classname = "",

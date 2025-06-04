@@ -1,7 +1,7 @@
 "use server";
 
 import style from "./header.module.css";
-import { SectionLogo, NavigationLink } from "./client";
+import { NavigationLink } from "./client";
 
 interface IHeader {
     /**
@@ -12,6 +12,14 @@ interface IHeader {
 }
 
 function SectionNavigation({classname}: {classname?: string}) {
+async function SectionLogo({ classname = "" }: { classname?: string }) {
+    return (
+        <div className={classname}>
+            {/*TODO: add logo*/}
+            <h1>FlexCode</h1>
+        </div>
+    );
+}
     return (
         <nav className={classname}>
             <NavigationLink text={"Главная"} url={"/"} /> {/*TODO: move to props*/}
