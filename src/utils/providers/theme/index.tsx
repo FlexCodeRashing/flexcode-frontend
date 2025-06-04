@@ -22,7 +22,7 @@ export function ThemeProvider(props: {
     console.debug("Fallback theme: ", props.fallbackTheme);
 
     useEffect(() => {
-        setCookie("theme", props.theme);
+        setCookie("theme", props.theme, {maxAge: 60*60*24*30*4});
         if (theme == "system") {
             const isPreferDark = window.matchMedia(
                 "(prefers-color-scheme: dark)"
@@ -35,7 +35,7 @@ export function ThemeProvider(props: {
 
     if (theme != "system") {
         if (props.theme === "system") {
-            setCookie("theme-last-system", theme);
+            setCookie("theme-last-system", theme, {maxAge: 60*60*24*30*4});
         }
         const themeStyle = getStyleFromTheme(theme);
         return (
