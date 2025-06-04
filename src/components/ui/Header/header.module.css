@@ -1,31 +1,34 @@
-.header-wrapper {
-    height: var(--header-height);
-    margin: 0 1.5rem;
-}
-
 .header {
-    height: 100%;
+    height: var(--header-height);
+
+    margin: 0 1.5rem;
 
     display: flex;
     flex-direction: row;
     justify-content: center;
-
-    min-width: fit-content;
-    max-width: .67vw;
-    margin: 0 auto;
 }
 
 .header > * {
     height: 100%;
     flex-basis: 0;
     flex-grow: 1;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header__logo {
-    padding: .75rem;
+    padding: 0.75rem;
+    justify-content: start;
 }
 
 .header__logo > * {
     height: 100%;
     width: auto;
+}
+
+.header__navigation {
+    gap: 1rem;
+    font-weight: 500;
 }
