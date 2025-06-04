@@ -11,7 +11,6 @@ interface IHeader {
     forceState?: "logged" | "not-logged";
 }
 
-function SectionNavigation({classname}: {classname?: string}) {
 async function SectionLogo({ classname = "" }: { classname?: string }) {
     return (
         <div className={classname}>
@@ -20,6 +19,8 @@ async function SectionLogo({ classname = "" }: { classname?: string }) {
         </div>
     );
 }
+
+async function SectionNavigation({classname}: {classname?: string}) {
     return (
         <nav className={classname}>
             <NavigationLink text={"Главная"} url={"/"} /> {/*TODO: move to props*/}
