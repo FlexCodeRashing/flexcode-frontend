@@ -31,12 +31,13 @@ export default async function RootLayout({
 }) {
     const cookieStore = await cookies();
     const theme = cookieStore.get("theme")?.value ?? "system";
+    const fallbackTheme = cookieStore.get("theme-last-system")?.value ?? "dark"
     return (
         <html>
             <body
                 className={`antialiased ${fontGeist.variable} ${fontInter.variable}`}
             >
-                <ThemeProvider theme={theme}>
+                <ThemeProvider theme={theme} fallbackTheme={fallbackTheme}>
                     <AppLayout>{children}</AppLayout>
                 </ThemeProvider>
             </body>

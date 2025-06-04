@@ -11,9 +11,11 @@ const THEMES: { [key: string]: string } = {
     dark: darkTheme.theme
 };
 
-export function ThemeProvider(props: { children?: ReactNode; theme: string }) {
-    const [theme, setTheme] = useState<string>(props.theme);
+export function ThemeProvider(props: { children?: ReactNode; theme: string, fallbackTheme: string }) {
     const setCookie = useSetCookie();
+    const [theme, setTheme] = useState<string>(props.theme);
+
+    console.debug("Fallback theme: ", props.fallbackTheme);
 
     useEffect(() => {
         setCookie("theme", props.theme);
@@ -21,12 +23,22 @@ export function ThemeProvider(props: { children?: ReactNode; theme: string }) {
             const isPreferDark = window.matchMedia(
                 "(prefers-color-scheme: dark)"
             ).matches;
-            console.debug("Prefers theme: ", isPreferDark ? "dark" : "light");
-            setTheme(isPreferDark ? "dark" : "light");
+            const systemTheme = isPreferDark ? "dark" : "light";
+            console.debug("Prefers theme: ", systemTheme);
+            setTheme(systemTheme);
         }
     }, [props.theme, theme, setCookie]);
+
     if (theme != "system") {
+        setCookie("theme-last-system", theme);
         const themeStyle = getStyleFromTheme(theme);
+        return (
+            <div className={`${style.theme} ${themeStyle}`}>
+                {props.children}
+            </div>
+        );
+    } else if (props.fallbackTheme) {
+        const themeStyle = getStyleFromTheme(props.fallbackTheme);
         return (
             <div className={`${style.theme} ${themeStyle}`}>
                 {props.children}
@@ -35,4 +47,4 @@ export function ThemeProvider(props: { children?: ReactNode; theme: string }) {
     }
 }
 
-export const getStyleFromTheme = (theme: string) => THEMES[theme] ?? darkTheme;
+const getStyleFromTheme = (theme: string) => THEMES[theme] ?? darkTheme;
