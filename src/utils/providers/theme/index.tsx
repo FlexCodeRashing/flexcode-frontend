@@ -30,7 +30,9 @@ export function ThemeProvider(props: { children?: ReactNode; theme: string, fall
     }, [props.theme, theme, setCookie]);
 
     if (theme != "system") {
-        setCookie("theme-last-system", theme);
+        if (props.theme === "system") {
+            setCookie("theme-last-system", theme);
+        }
         const themeStyle = getStyleFromTheme(theme);
         return (
             <div className={`${style.theme} ${themeStyle}`}>
