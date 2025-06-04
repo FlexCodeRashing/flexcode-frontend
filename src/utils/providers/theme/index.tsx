@@ -3,13 +3,23 @@
 import style from "./style.module.css";
 import darkTheme from "@/config/themes/dark.module.css";
 import lightTheme from "@/config/themes/light.module.css";
-import { ReactNode, useEffect, useState } from "react";
+import {
+    createContext,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState
+} from "react";
 import { useSetCookie } from "cookies-next";
 
 const THEMES: { [key: string]: string } = {
     light: lightTheme.theme,
     dark: darkTheme.theme
 };
+
+const ThemeContext = createContext<
+    { themeSelected: string; themeDisplayed: string } | undefined
+>(undefined);
 
 export function ThemeProvider(props: {
     children?: ReactNode;
@@ -22,7 +32,7 @@ export function ThemeProvider(props: {
     console.debug("Fallback theme: ", props.fallbackTheme);
 
     useEffect(() => {
-        setCookie("theme", props.theme, {maxAge: 60*60*24*30*4});
+        setCookie("theme", props.theme, { maxAge: 60 * 60 * 24 * 30 * 4 });
         if (theme == "system") {
             const isPreferDark = window.matchMedia(
                 "(prefers-color-scheme: dark)"
@@ -35,13 +45,19 @@ export function ThemeProvider(props: {
 
     if (theme != "system") {
         if (props.theme === "system") {
-            setCookie("theme-last-system", theme, {maxAge: 60*60*24*30*4});
+            setCookie("theme-last-system", theme, {
+                maxAge: 60 * 60 * 24 * 30 * 4
+            });
         }
         const themeStyle = getStyleFromTheme(theme);
         return (
-            <div className={`${style.theme} ${themeStyle}`}>
-                {props.children}
-            </div>
+            <ThemeContext.Provider
+                value={{ themeSelected: props.theme, themeDisplayed: theme }}
+            >
+                <div className={`${style.theme} ${themeStyle}`}>
+                    {props.children}
+                </div>
+            </ThemeContext.Provider>
         );
     } else if (props.fallbackTheme) {
         const themeStyle = getStyleFromTheme(props.fallbackTheme);
@@ -54,3 +70,5 @@ export function ThemeProvider(props: {
 }
 
 const getStyleFromTheme = (theme: string) => THEMES[theme] ?? darkTheme;
+
+export const useTheme = () => useContext(ThemeContext);
