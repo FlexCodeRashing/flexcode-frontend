@@ -31,7 +31,7 @@ export default async function RootLayout({
 }) {
     const cookieStore = await cookies();
     const theme = cookieStore.get("theme")?.value ?? "system";
-    const fallbackTheme = cookieStore.get("theme-last-system")?.value ?? "dark"
+    const fallbackTheme = cookieStore.get("theme-last-system")?.value ?? "dark";
     return (
         <html>
             <body

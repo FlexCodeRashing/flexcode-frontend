@@ -11,7 +11,11 @@ const THEMES: { [key: string]: string } = {
     dark: darkTheme.theme
 };
 
-export function ThemeProvider(props: { children?: ReactNode; theme: string, fallbackTheme: string }) {
+export function ThemeProvider(props: {
+    children?: ReactNode;
+    theme: string;
+    fallbackTheme: string;
+}) {
     const setCookie = useSetCookie();
     const [theme, setTheme] = useState<string>(props.theme);
 
