@@ -3,14 +3,6 @@
 import style from "./header.module.css";
 import { NavigationLink } from "./client";
 
-interface IHeader {
-    /**
-     * For testing only. Don't use in production
-     * @deprecated
-     */
-    forceState?: "logged" | "not-logged";
-}
-
 async function SectionLogo({ classname = "" }: { classname?: string }) {
     return (
         <div className={classname}>
@@ -30,6 +22,13 @@ async function SectionNavigation({classname}: {classname?: string}) {
     );
 }
 
+interface IHeader {
+    /**
+     * For testing only. Don't use in production
+     * @deprecated
+     */
+    forceState?: "logged" | "not-logged";
+}
 export default async function Header(props: IHeader) {
     return (
         <header className={style.header}>
