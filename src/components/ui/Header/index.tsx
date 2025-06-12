@@ -1,7 +1,10 @@
 "use server";
 
+import "./header.module.css";
+import { NavigationLink, ThemeSwitcher } from "./client";
+import { HeaderStateProvider } from "./provider";
+import React from "react";
 import style from "./header.module.css";
-import { NavigationLink } from "./client";
 
 async function SectionLogo({ classname = "" }: { classname?: string }) {
     return (
@@ -23,6 +26,14 @@ async function SectionNavigation({ classname }: { classname?: string }) {
     );
 }
 
+async function SectionUser({ classname = "" }: { classname?: string }) {
+    return (
+        <div className={classname}>
+            <ThemeSwitcher />
+        </div>
+    );
+}
+
 interface IHeader {
     /**
      * For testing only. Don't use in production
@@ -30,12 +41,17 @@ interface IHeader {
      */
     forceState?: "logged" | "not-logged";
 }
+
 export default async function Header(props: IHeader) {
     return (
-        <header className={style.header}>
-            <SectionLogo classname={style.header__logo} />
-            <SectionNavigation classname={style.header__navigation} />
-            <div></div>
+        <header className={style.header_wrapper}>
+            <div className={style.header}>
+                <SectionLogo classname={style.header__logo} />
+                <SectionNavigation classname={style.header__navigation} />
+                <HeaderStateProvider>
+                    <SectionUser classname={style.header__user} />
+                </HeaderStateProvider>
+            </div>
         </header>
     );
 }
