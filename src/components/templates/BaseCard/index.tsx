@@ -11,6 +11,7 @@ interface IBaseCard {
     borderRadius?: Property.BorderRadius;
     padding?: Property.Padding;
     style?: CSSProperties;
+    className?: string;
 }
 
 export default function BaseCard(props: IBaseCard) {
@@ -22,5 +23,9 @@ export default function BaseCard(props: IBaseCard) {
         padding: "1rem",
         ...props.style
     };
-    return <div style={style}>{props.children}</div>;
+    return (
+        <div style={style} className={props.className ?? ""}>
+            {props.children}
+        </div>
+    );
 }
