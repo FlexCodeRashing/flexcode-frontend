@@ -16,7 +16,7 @@ export function NavigationLink({
     const pathname = usePathname();
     if (pathname == url) {
         if (classname) {
-            classname += " "
+            classname += " ";
         }
         classname += "accent";
     }
