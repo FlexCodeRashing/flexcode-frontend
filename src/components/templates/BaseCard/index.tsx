@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import { CSSProperties, ReactNode } from "react";
 import { Property } from "csstype";
@@ -13,7 +13,7 @@ interface IBaseCard {
     style?: CSSProperties;
 }
 
-export default async function BaseCard(props: IBaseCard) {
+export default function BaseCard(props: IBaseCard) {
     const style: CSSProperties = {
         borderWidth: props.borderWidth ?? "1px",
         borderColor: props.borderColor ?? "rgb(209, 213, 219)",
