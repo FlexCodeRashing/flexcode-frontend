@@ -12,10 +12,11 @@ async function SectionLogo({ classname = "" }: { classname?: string }) {
     );
 }
 
-async function SectionNavigation({classname}: {classname?: string}) {
+async function SectionNavigation({ classname }: { classname?: string }) {
     return (
         <nav className={classname}>
-            <NavigationLink text={"Главная"} url={"/"} /> {/*TODO: move to props*/}
+            <NavigationLink text={"Главная"} url={"/"} />
+            {/*TODO: move to props*/}
             <NavigationLink text={"Курсы"} url={"/courses"} />
             <NavigationLink text={"Поддержка"} url={"/support"} />
         </nav>
